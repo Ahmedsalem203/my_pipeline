@@ -9,7 +9,7 @@ pipeline{
       steps{
         sh '''
                echo "Building Docker image..."
-               docker biuld -t $IMAGE_NAME:$TAG .
+               docker build -t $IMAGE_NAME:$TAG .
           '''
       }
     }

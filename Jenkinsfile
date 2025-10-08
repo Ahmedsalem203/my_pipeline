@@ -1,10 +1,13 @@
 pipeline{
   agent any
+  tools{
+    nodejs 'node 24.9.0'
+  }
   stages{
-    stage('build'){
+    stage('Check NPM version'){
       steps{
         sh '''
-            echo "building stage"
+             npm -v
           '''
       }
     }

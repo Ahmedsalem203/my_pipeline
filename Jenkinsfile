@@ -39,7 +39,7 @@ pipeline{
                     sh """
                         echo "Deploying container..."
                         docker rm -f ${IMAGE_NAME}_container || true
-                        docker run -d -p 8080:80 --name ${IMAGE_NAME}_container $IMAGE_NAME:$TAG
+                        docker run -d -p 8081:80 --name ${IMAGE_NAME}_container $IMAGE_NAME:$TAG
                         echo "✅ Container is running on http://localhost:8080"
                     """
                 }

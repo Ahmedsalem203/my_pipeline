@@ -13,19 +13,26 @@ pipeline{
           '''
       }
     }
-    stage('test'){
-      steps{
-        sh '''
-            echo "testing stage"
-          '''
-      }
-    }
-    stage('deploy'){
-      steps{
-        sh '''
-            echo "deploying stage"
-          '''
-      }
-    }
+     stage('Push Image to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'my_docker_hup', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh """
+                        echo "Logging in to Docker Hub..."
+                        // docker login -u $DOCKER_USER -p $DOCKER_PASS
+                        docker login -u $DOCKER_USER -p $DOCKER_PASS
+
+                        echo "Tagging image..."
+                        docker tag $IMAGE_NAME:$TAG $DOCKER_USER/$IMAGE_NAME:$TAG
+
+                        echo "Pushing image to Docker Hub..."
+                        // docker push $DOCKER_USER/$IMAGE_NAME:$TAG
+                        docker push $DOCKER_USER/$IMAGE_NAME:$TAG
+
+                        echo "Logging out..."
+                        docker logout
+                    """
+                }
+            }
+        }
   }
 }

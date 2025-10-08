@@ -1,13 +1,15 @@
 pipeline{
   agent any
-  tools{
-    nodejs 'node 24.9.0'
+  environment{
+       IMAGE_NAME = "myapp"       
+       TAG = "latest"   
   }
   stages{
-    stage('Check NPM version'){
+    stage('Build Docker Image'){
       steps{
         sh '''
-             npm -v
+               echo "Building Docker image..."
+               docker biuld -t $IMAGE_NAME:$TAG .
           '''
       }
     }

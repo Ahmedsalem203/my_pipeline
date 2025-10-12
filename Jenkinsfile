@@ -5,6 +5,16 @@ pipeline{
        TAG = "latest"   
   }
   stages{
+     stage('Checkout') {
+            steps {
+                checkout([$class: 'GitSCM',
+                    branches: [[name: '*/main']],
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [[$class: 'CloneOption', noTags: false, shallow: false, depth: 0]],
+                    userRemoteConfigs: [[url: 'https://github.com/Ahmedsalem203/my_pipeline.git']]
+                ])
+            }
+        }
      stage ("build docker")
       {
           steps 

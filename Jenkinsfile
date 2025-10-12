@@ -26,6 +26,20 @@ pipeline{
               }
           }
       }
+    stage ("Deploy")
+    {
+        steps 
+        {
+            sshagent(credentials: ['ssh-key']) 
+            {
+                sh """
+                    ssh ubuntu@54.92.204.102 '
+                    touch file-from-Jenkins
+                    '
+                """
+            }
+        }
+    }
 
   }
 }

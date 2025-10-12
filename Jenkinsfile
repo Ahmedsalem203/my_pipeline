@@ -36,7 +36,7 @@ pipeline{
                     ssh -o StrictHostKeyChecking=no ubuntu@34.228.241.65 '
                     docker ps
                     docker rm -f "\$(docker ps -aq)"
-                    docker run -p 80:80 -d docker.io/ahmed1salem/my-docker:v1
+                    // docker run -p 80:80 -d docker.io/ahmed1salem/my-docker:v1
                     '
                 """
             }

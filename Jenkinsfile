@@ -33,7 +33,7 @@ pipeline{
             sshagent(credentials: ['ssh-key']) 
             {
                 sh """
-                    ssh ubuntu@54.92.204.102 '
+                    ssh -o StrictHostKeyChecking=no ubuntu@54.163.219.186 '
                     touch file-from-Jenkins
                     '
                 """
